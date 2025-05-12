@@ -22,11 +22,10 @@ class request {
     }
 
 
-    public function verify(string $path, string $method){
+    public function verify(string $path, string $method):void{
         if(!in_array($method, $this->_allowedMethods)){
             throw new requestexception("Request method not allowed");
         }
-
         if(!$this->_routes->allowedRoute($path)){
             throw new requestexception("Request route not allowed");
         }
@@ -42,6 +41,14 @@ class request {
         $this->_path = explode('/', $path);
     }
 
+
+    public function setAllowedMethods(array $allowedMethods):void{
+        $this->_allowedMethods = $allowedMethods;
+    }
+
+    public function getAllowedMethods():array{
+        return $this->_allowedMethods;
+    }
 
 
 
